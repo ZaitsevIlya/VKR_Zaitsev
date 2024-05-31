@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static' , filename='css/main.css') }}">
+</head>
+<body>
+    <div class="overlay">
+        <!-- Анимация загрузки -->
+        <div class="loading-spinner">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="left-side">
+            <button onclick="showData('/get_etalons')">Список эталонов</button>
+            <button onclick="showData('/get_models')">Список моделей</button>
+            <button id="fileUploadButton">Добавить эталон</button>
+            <input type="file" id="fileInput" style="display: none;">
+            <br>
+            <form id="rankingForm">
+                <label for="directory">Справочник:</label><br>
+                <input type="text" id="directory" name="directory"><br>
+                <label for="etalonID">ID эталона:</label><br>
+                <input type="text" id="etalonID" name="etalonID"><br>
+                <label for="vectorizationModelID">ID модели:</label><br>
+                <input type="text" id="vectorizationModelID" name="vectorizationModelID"><br>
+                <label>Метрика:</label><br>
+                <input type="checkbox" id="metricMin" name="metric" value="min">
+                <label for="metricMin">min</label><br>
+                <input type="checkbox" id="metricMax" name="metric" value="max">
+                <label for="metricMax">max</label><br>
+                <input type="checkbox" id="metricMean" name="metric" value="mean">
+                <label for="metricMean">mean</label><br><br>
+                <label for="topN">Количество:</label><br>
+                <input type="number" id="topN" name="topN" min="1" value="5"><br>
+                <button type="button" onclick="sendRankingData()">Получить ранжирование</button>
+            </form>
+        </div>
+        <div class="right-side">
+            <h3>Таблица данных</h3>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                    </tr>
+                </thead>
+                <tbody id="data-body">
+                    <!-- Здесь будут данные из скрипта -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
